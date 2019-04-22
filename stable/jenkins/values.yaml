@@ -206,7 +206,7 @@ Master:
   # become the content of the configuration yaml file.  The first line after this is a JCasC root element, eg jenkins, credentials,
   # etc.  Best reference is https://<jenkins_url>/configuration-as-code/reference.  The example below creates a welcome message:
   JCasC:
-    enabled: false
+    enabled: true
     PluginVersion: 1.5
     SupportPluginVersion: 1.5
     ConfigScripts:
