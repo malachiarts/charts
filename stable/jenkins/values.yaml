@@ -213,6 +213,17 @@ Master:
       welcome-message: |
         jenkins:
           systemMessage: Welcome to our CI\CD server.  This Jenkins is configured and managed 'as code'.
+      #user-setup: |
+      #  jenkins:
+      #    securityRealm:
+      #      local:
+      #        allowsSignup: false
+      #        users:
+      #          - id: "admin"
+      #            password: "admin"
+      #          - id: "kari"
+      #            password: "kari"
+      #    authorizationStrategy: loggedInUsersCanDoAnything
 
   Sidecars:
     configAutoReload:
@@ -361,7 +372,7 @@ Persistence:
   ## A manually managed Persistent Volume and Claim
   ## Requires Persistence.Enabled: true
   ## If defined, PVC must be created manually before volume will be bound
-  ExistingClaim: "jenkins-pv-claim"
+  #ExistingClaim: "jenkins-pv-claim"
   ## jenkins data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -369,16 +380,17 @@ Persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  StorageClass: "manual"
+  StorageClass: "standard"
   Annotations: {}
   AccessMode: ReadWriteOnce
   Size: 8Gi
   volumes:
-  #  - name: nothing
-  #    emptyDir: {}
+  #  - name: admin-password
+  #    secret:
+  #      secretName: admin-password
   mounts:
-  #  - mountPath: /var/nothing
-  #    name: nothing
+  #  - mountPath: /run/secrets/
+  #    name: admin-password
   #    readOnly: true
 
 NetworkPolicy:
