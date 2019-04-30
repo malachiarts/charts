@@ -220,9 +220,9 @@ Master:
       #        allowsSignup: false
       #        users:
       #          - id: "admin"
-      #            password: "admin"
+      #            password: ${admin-password.txt}
       #          - id: "kari"
-      #            password: "kari"
+      #            password: ${admin-password.txt}
       #    authorizationStrategy: loggedInUsersCanDoAnything
 
   Sidecars:
