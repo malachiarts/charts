@@ -158,7 +158,7 @@ Master:
   #  - |
   #    print 'adding global pipeline libraries, register properties, bootstrap jobs...'
   # Kubernetes secret that contains a 'credentials.xml' for Jenkins
-  # CredentialsXmlSecret: jenkins-credentials
+  CredentialsXmlSecret: jenkins-credentials
   # Kubernetes secret that contains files to be put in the Jenkins 'secrets' directory,
   # useful to manage encryption keys used for credentials.xml for instance (such as
   # master.key and hudson.util.Secret)
@@ -179,7 +179,71 @@ Master:
       <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
       <url>https://github.com/malachiarts/multisleep-pipeline</url>
-      <credentialsId>fb2f471d-096a-4841-a24f-e1c8f152eb69</credentialsId>
+      <credentialsId>github-kari-malachi</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+      </userRemoteConfigs>
+      <branches>
+      <hudson.plugins.git.BranchSpec>
+      <name>*/tycho</name>
+      </hudson.plugins.git.BranchSpec>
+      </branches>
+      <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+      <submoduleCfg class="list"/>
+      <extensions/>
+      </scm>
+      <scriptPath>Jenkinsfile</scriptPath>
+      <lightweight>true</lightweight>
+      </definition>
+      <triggers/>
+      <disabled>false</disabled>
+      </flow-definition> 
+    multisleeptwo: |-
+      <flow-definition plugin="workflow-job@2.31">
+      <actions>
+      <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.3.8"/>
+      </actions>
+      <description/>
+      <keepDependencies>false</keepDependencies>
+      <properties/>
+      <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.66">
+      <scm class="hudson.plugins.git.GitSCM" plugin="git@3.9.1">
+      <configVersion>2</configVersion>
+      <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+      <url>https://github.com/malachiarts/multisleep-pipeline</url>
+      <credentialsId>github-kari-malachi</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+      </userRemoteConfigs>
+      <branches>
+      <hudson.plugins.git.BranchSpec>
+      <name>*/tycho</name>
+      </hudson.plugins.git.BranchSpec>
+      </branches>
+      <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+      <submoduleCfg class="list"/>
+      <extensions/>
+      </scm>
+      <scriptPath>Jenkinsfile</scriptPath>
+      <lightweight>true</lightweight>
+      </definition>
+      <triggers/>
+      <disabled>false</disabled>
+      </flow-definition> 
+    multisleepthree: |-
+      <flow-definition plugin="workflow-job@2.31">
+      <actions>
+      <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.3.8"/>
+      </actions>
+      <description/>
+      <keepDependencies>false</keepDependencies>
+      <properties/>
+      <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.66">
+      <scm class="hudson.plugins.git.GitSCM" plugin="git@3.9.1">
+      <configVersion>2</configVersion>
+      <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+      <url>https://github.com/malachiarts/multisleep-pipeline</url>
+      <credentialsId>github-kari-malachi</credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
@@ -212,7 +276,7 @@ Master:
     ConfigScripts:
       welcome-message: |
         jenkins:
-          systemMessage: Welcome to our CI\CD server.  This Jenkins is configured and managed 'as code'.
+          systemMessage: Welcome to our CI\CD server.  This happy Jenkins is configured and managed 'as code'.
       #user-setup: |
       #  jenkins:
       #    securityRealm:
@@ -285,7 +349,7 @@ Master:
   # that the chart is installed.  Setting `OverwriteConfig` to `true` will overwrite
   # the jenkins config with the contents of the configMap every time the pod starts.
   # This will also overwrite all init scripts
-  OverwriteConfig: false
+  OverwriteConfig: true
 
   # By default, the Jobs Map is only used to set the initial jobs the first time
   # that the chart is installed.  Setting `overwriteJobs` to `true` will overwrite
@@ -329,11 +393,11 @@ Agent:
   Privileged: false
   resources:
     requests:
-      cpu: "200m"
-      memory: "256Mi"
+      cpu: "500m"
+      memory: "512Mi"
     limits:
-      cpu: "200m"
-      memory: "256Mi"
+      cpu: "500m"
+      memory: "512Mi"
   # You may want to change this to true while testing a new image
   AlwaysPullImage: false
   # Controls how slave pods are retained after the Jenkins build completes
